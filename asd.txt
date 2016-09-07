@@ -1,0 +1,30 @@
+Hi All,
+
+Please refer below code snippet for searching an entity, It will solve your search issue.
+
+
+
+   SearchContext searchContext = SearchContextFactory.getInstance(request);
+            String searchEngineId = searchContext.getSearchEngineId();
+            Long companyId = searchContext.getCompanyId();
+
+            BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create(searchContext);
+
+            TermQuery termQuery = TermQueryFactoryUtil.create(searchContext, Field.ENTRY_CLASS_NAME,
+                    {Name of ClassName} );
+            booleanQuery.add(termQuery, BooleanClauseOccur.MUST);
+            log.info("categoryId--------------" + categoryId);
+            TermQuery productCategoryTermQuery = null;
+
+          
+            // Apply free text keywords search: configure required fields in 'SEARCH_FIELDS' constant 
+            if (Validator.isNotNull(freeTextKeywords)) {
+                BooleanQuery booleanKeywordsSearchQuery = BooleanQueryFactoryUtil.create(searchContext);
+                booleanKeywordsSearchQuery.addTerms(ProductSearchUtil.SEARCH_FIELDS, freeTextKeywords,
+                        true);
+                booleanQuery.add(booleanKeywordsSearchQuery, BooleanClauseOccur.MUST);
+            }
+
+            // if (sorts == null || sorts.length == 0)
+            sorts = new Sort[] {};
+            Hits hits = SearchEngineUtil.search(searchEngineId, companyId, booleanQuery, sorts, start, end);

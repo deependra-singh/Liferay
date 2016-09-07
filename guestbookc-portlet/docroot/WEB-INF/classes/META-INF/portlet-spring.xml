@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.demo.three.service.EntryLocalService" class="com.demo.three.service.impl.EntryLocalServiceImpl" />
+	<bean id="com.demo.three.service.EntryService" class="com.demo.three.service.impl.EntryServiceImpl" />
+	<bean id="com.demo.three.service.persistence.EntryPersistence" class="com.demo.three.service.persistence.EntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.demo.three.service.GuestbookLocalService" class="com.demo.three.service.impl.GuestbookLocalServiceImpl" />
+	<bean id="com.demo.three.service.GuestbookService" class="com.demo.three.service.impl.GuestbookServiceImpl" />
+	<bean id="com.demo.three.service.persistence.GuestbookPersistence" class="com.demo.three.service.persistence.GuestbookPersistenceImpl" parent="basePersistence" />
+</beans>
